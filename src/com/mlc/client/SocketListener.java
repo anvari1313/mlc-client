@@ -48,6 +48,7 @@ public class SocketListener extends Thread {
     public void sendMessage(String message){
         try {
             output.writeObject(new Message(message,"laptop"));
+            output.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
