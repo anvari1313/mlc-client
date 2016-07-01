@@ -1,4 +1,4 @@
-package com.mlc.client;
+package com.mlc.server;
 
 import java.io.Serializable;
 

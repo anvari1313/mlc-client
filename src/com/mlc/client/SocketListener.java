@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import com.mlc.server.Message;
 
 /**
  * Created by ahmad on 7/1/16.
@@ -27,13 +28,14 @@ public class SocketListener extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        isClientConneted = true;
+        start();
     }
 
     @Override
     public void run() {
         while (isClientConneted){
-            Message recievedMessage;
+            com.mlc.server.Message recievedMessage;
             try {
                 recievedMessage = ((Message) input.readObject());
                 chatForm.recieveMessage(recievedMessage);
@@ -56,5 +58,13 @@ public class SocketListener extends Thread {
 
     public void setChatForm(ChatForm chatForm){
         this.chatForm = chatForm;
+    }
+
+    public void closeConnection(){
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
