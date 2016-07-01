@@ -19,7 +19,7 @@ public class SocketListener extends Thread {
     private ObjectOutputStream output;
 
     public SocketListener(){
-        serverAddress = new byte[]{(byte)192,(byte)192,(byte)192,(byte)192};
+        serverAddress = new byte[]{(byte)192,(byte)168,(byte)1,(byte)4};
         try {
             socket = new Socket(InetAddress.getByAddress(serverAddress),port);
             input = new ObjectInputStream(socket.getInputStream());
@@ -47,7 +47,7 @@ public class SocketListener extends Thread {
 
     public void sendMessage(String message){
         try {
-            output.writeObject(new Message(message,"username"));
+            output.writeObject(new Message(message,"laptop"));
         } catch (IOException e) {
             e.printStackTrace();
         }
